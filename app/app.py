@@ -14,7 +14,7 @@ healthCheckSampleFilepath = Path(__file__).resolve().parent.joinpath("sample_for
 @app.route("/health")
 def health():
     pdfContent = unoconvert.convert(inpath=healthCheckSampleFilepath, convert_to="pdf")
-    if (len(pdfContent) == 92485):
+    if (len(pdfContent) == 11614):
         return 'Ok'
     else:
         abort(500)

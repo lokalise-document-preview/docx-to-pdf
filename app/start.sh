@@ -3,6 +3,8 @@
 echo "Starting unoserver"
 unoserver --daemon
 
+sleep 1s
+
 echo "Starting flask"
 gunicorn \
     --workers 1 --worker-class sync \
