@@ -1,3 +1,4 @@
+from flask import abort
 from flask import Flask
 from flask import request
 from flask import Response
@@ -7,11 +8,16 @@ from file_helpers import is_file_allowed
 
 app = Flask(__name__)
 unoconvert = converter.UnoConverter()
+healthCheckSampleFilepath = Path(__file__).resolve().parent.joinpath("sample_for_health_check.odt")
 
 # TODO Health check: convert a minimal ODF into PDF and verify that they are the same ***
 @app.route("/health")
 def health():
-    return 'Ok'
+    pdfContent = unoconvert.convert(inpath=healthCheckSampleFilepath, convert_to="pdf")
+    if (len(pdfContent) == 92485):
+        return 'Ok'
+    else:
+        abort(500)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():    
