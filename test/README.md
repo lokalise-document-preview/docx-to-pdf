@@ -4,7 +4,7 @@ docker run \
     --memory="256m" \
     --cpus="1" \
     -p 2121:2121 \
-    docker-docx-to-pdf-convert-with-libreoffice:latest
+    ghcr.io/lokalise-document-preview/docx-to-pdf-convert-with-libreoffice:latest
 ```
 
 https://k6.io/docs/getting-started/running-k6/

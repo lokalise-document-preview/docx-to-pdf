@@ -1,0 +1,43 @@
+app = "docx-to-pdf-convert-with-libreoffice"
+
+kill_signal = "SIGINT"
+kill_timeout = 15
+processes = []
+
+[build]
+  image = "ghcr.io/lokalise-document-preview/docx-to-pdf-convert-with-libreoffice:latest"
+
+[env]
+  FLASK_RUN_HOST = "0.0.0.0"
+  FLASK_RUN_PORT = "8080"
+  FLASK_ENV = "production"
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 5
+    soft_limit = 2
+    type = "requests"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "10s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    timeout = 2000

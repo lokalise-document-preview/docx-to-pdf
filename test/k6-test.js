@@ -3,8 +3,8 @@ import { sleep } from 'k6';
 
 export default function () {
   http.post(
-    'http://localhost:2121/convert-zip-from-url',
     '{ "url": "S3-url-here" }',
+    'https://docx-to-pdf-convert-with-libreoffice.fly.dev/convert-zip-from-url',
     { headers: { 'Content-Type': 'application/json' } }
   );
 }
