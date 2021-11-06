@@ -11,5 +11,6 @@ def is_file_allowed(filename):
 def unzip_into_bytes(url):
     zip = urllib.request.urlopen(url)
     archive = ZipFile(BytesIO(zip.read()))
-    archived_files = archive.filelist
-    return archive.read(archived_files[0])
+    for file in archive.filelist:
+        if not file.filename.endswith("/"):
+            return archive.read(file)
