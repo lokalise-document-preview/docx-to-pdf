@@ -13,11 +13,14 @@ healthCheckSampleFilepath = Path(__file__).resolve().parent.joinpath("sample_for
 
 @app.route("/health")
 def health():
-    pdfContent = unoconvert.convert(inpath=healthCheckSampleFilepath, convert_to="pdf")
-    if (len(pdfContent) == 11614):
-        return 'Ok'
-    else:
-        abort(500)
+    try:
+        pdfContent = unoconvert.convert(inpath=healthCheckSampleFilepath, convert_to="pdf")
+        if (len(pdfContent) == 11614):
+            return Response("Ok", status=200)
+        else:
+            return Response("Conversion result is not matching the expected one", status=500)
+    except Exception as e:
+        return Response(repr(e), status=500)
 
 @app.route('/convert-file', methods=['POST'])
 def convert_file():    
