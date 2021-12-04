@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Starting unoserver"
-unoserver --daemon
+unoserver &
 
 sleep 1s
 

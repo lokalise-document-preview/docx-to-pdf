@@ -5,6 +5,9 @@ docker run \
     --cpus="1" \
     -p 2121:2121 \
     ghcr.io/lokalise-document-preview/docx-to-pdf-convert-with-libreoffice:latest
+
+docker build . --platform linux/amd64 -t ghcr.io/lokalise-document-preview/docx-to-pdf-convert-with-libreoffice:latest
+docker push ghcr.io/lokalise-document-preview/docx-to-pdf-convert-with-libreoffice:latest
 ```
 
 https://k6.io/docs/getting-started/running-k6/
